@@ -87,9 +87,9 @@ class StrRandomType(RandomType):
 class DoubleRandomType(RandomType):
 
     def get_random(self):
-        int_ran = str(IntRandomType(length=self.length,
-                                    min_value=self.min_value, max_value=self.max_value
-                                    ).get_random())
+        int_ran = str(IntRandomType(
+            length=self.length, min_value=self.min_value,
+            max_value=self.max_value).get_random())
 
         if int_ran.startswith('-'):
             is_neg = True
