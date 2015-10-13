@@ -2,7 +2,7 @@
 RandomGetter
 ==============
 
-This project provides a tools for getting various format or kind 
+This project provides a tools for getting various format or kind Random Value 
 
 How to Install
 ================

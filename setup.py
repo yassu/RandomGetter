@@ -3,13 +3,13 @@ from setuptools import setup
 
 setup(
     name='RandomGetter',
-    version='0.0.2',
+    version='0.0.3',
     author='yassu',
     author_email="mathyassu@gmail.com",
 
     packages=['random_getter'],
-    description=('This project provides a tools for getting various format or'
-        'kind.'),
+    description=('This project provides a tools for getting various format '
+        'or kind Random Value.'),
     long_description=open("readme.rst").read(),
     url= 'https://github.com/yassu/RandomGetter',
     classifiers=[
