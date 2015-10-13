@@ -225,6 +225,13 @@ def get_parser():
         default=None,
         help='maximal value of random double values'
     )
+    parser.add_option(
+        '--debug',
+        dest='debug',
+        action='store_true',
+        default=False,
+        help='run with debug mode'
+    )
     return parser
 
 
@@ -266,6 +273,9 @@ if __name__ == '__main__':
             ran = get_random_result(options)
             print(ran)
     except (IntRandomRangeException, DoubleRandomRangeException) as ex:
-        print("Error: {}".format(ex.message))
-    except Exception:
-        print("Illegal Error")
+            print("Error: {}".format(ex.message))
+    except Exception as e:
+        if options.debug:
+            traceback.print_exc()
+        else:
+            error("%s" % e)
