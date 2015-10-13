@@ -3,6 +3,7 @@ import random
 import re
 from optparse import OptionParser
 
+__VERSION__ = '0.0.3'
 DEFAULT_RANDOM_TYPE = None  # re-define after
 DEFAULT_RANDOM_LENGTH = 4
 DEFAULT_RANDOM_NUMBER = 1
@@ -141,7 +142,7 @@ DEFAULT_RANDOM_TYPE = IntRandomType
 
 
 def get_parser():
-    parser = OptionParser()
+    parser = OptionParser(version=__VERSION__)
     parser.add_option(
         '--int',
         action='store_true',

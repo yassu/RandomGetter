@@ -1,9 +1,10 @@
 # coding: UTF-8
 from setuptools import setup
+from random_getter.random_getter import __VERSION__
 
 setup(
     name='RandomGetter',
-    version='0.0.3',
+    version=__VERSION__,
     author='yassu',
     author_email="mathyassu@gmail.com",
 
