@@ -14,9 +14,13 @@ def get_random_from_format(fo, options):
         kind_random_type = {'int': IntRandomType, 'str': StrRandomType,
                             'double': DoubleRandomType}[kind]
         while kind_element in fo:
+            min_kind = getattr(options, {'int': 'min_int', 'double':
+                'min_double', 'str': 'min_str'}[kind])
+            max_kind = getattr(options, {'int': 'max_int', 'double':
+                'max_double', 'str': 'max_str'}[kind])
             fo = fo.replace(kind_element, str(kind_random_type(
                 length=options.length,
-                min_value=options.min_int, max_value=options.max_int
+                min_value=min_kind, max_value=max_kind
             ).get_random()),
                 1
             )
@@ -160,6 +164,13 @@ def get_parser():
         dest='min_int',
         default=None,
         help='minimal value of random int values'
+    )
+    parser.add_option(
+        '--min-double',
+        type=double,
+        dest='min_double',
+        default=None,
+        help='minimal value of random double values'
     )
     parser.add_option(
         '--max-int',
