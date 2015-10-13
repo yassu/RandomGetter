@@ -56,7 +56,7 @@ random number < 10**4 - 1.
 * `--max-int`: indicate maximal value of random int values
 * `--min-double`: indicate minimal value of random double values
 * `--max-double`: indicate maximal value of random double values
-* `-f {format}, --format {format}`: indicate format of occured random values
+* `-f, --format`: indicate format of occured random values
 
 Format
 ========
