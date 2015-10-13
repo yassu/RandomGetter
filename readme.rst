@@ -8,6 +8,7 @@ How to Install
 ================
 
 ::
+
     $ pip install RandomGetter
 
 or
@@ -78,8 +79,7 @@ Format is a string which embed "format-element".
 * `[{type}]`: random `{type}` value
 * `[{type}{min}]`: random `{type}` value more than or equal to `{min}`
 * `[{type}:{max}]`: random `{type}` value less than or equal to `{max}`
-* `[{type}{min}:{max}]`: random `{type}` value less than or equal to `{max}` and
-    more than or equal to `{min}`
+* `[{type}{min}:{max}]`: random `{type}` value less than or equal to `{max}` and more than or equal to `{min}`
 
 License
 =========
