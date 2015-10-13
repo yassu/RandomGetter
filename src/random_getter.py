@@ -93,29 +93,23 @@ class StrRandomType(RandomType):
 class DoubleRandomType(RandomType):
 
     def get_random(self):
-        print(self.min_value)
-        int_ran = str(IntRandomType(
-            length=self.length, min_value=self.min_value,
-            max_value=self.max_value).get_random())
-
-        if int_ran.startswith('-'):
-            is_neg = True
-            int_ran = int_ran[1:]
+        """ This method don't see length.
+        Use min_double or max_double """
+        # consider min_value, max_value and length
+        if self.min_value is None:
+            min_value = -(10**self.length - 1)
         else:
-            is_neg = False
+            min_value = self.min_value
+        # TODO: if min_value < -10**(self.length + 1), raise error
 
-        dot_ind = random.randint(0, len(int_ran) - 1)
-        print('dot_ind: {}'.format(dot_ind))
-        if dot_ind == 0:
-            ran = '0.' + int_ran
-        elif dot_ind == len(int_ran) - 1:
-            ran = int_ran + '.0'
+        if self.max_value is None:
+            max_value = 10**self.length - 1
         else:
-            ran = int_ran[:dot_ind] + '.' + int_ran[dot_ind:]
+            max_value = self.max_value
+        # TODO: if max_value > 10** (self.length + 1), lraise error
 
-        if is_neg:
-            ran = '-' + ran
-        return ran
+        t = random.random()
+        return (max_value - min_value)*t + min_value
 
 DEFAULT_RANDOM_TYPE = IntRandomType
 
@@ -205,10 +199,15 @@ def get_random_result(options):
             random_type = DoubleRandomType
         else:
             random_type = DEFAULT_RANDOM_TYPE
-        print(random_type)
+        min_value = getattr(options, {IntRandomType: 'min_int',
+            DoubleRandomType: 'min_double', StrRandomType: 'min_str'}
+                [random_type])
+        max_value = getattr(options, {IntRandomType: 'max_int',
+            DoubleRandomType: 'max_double', StrRandomType: 'max_str'}
+                [random_type])
         return random_type(
             length=options.length,
-            min_value=options.min_int, max_value=options.max_int
+            min_value=min_value, max_value=max_value
         ).get_random()
 
 if __name__ == '__main__':
