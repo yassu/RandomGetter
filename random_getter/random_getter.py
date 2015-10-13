@@ -142,7 +142,8 @@ DEFAULT_RANDOM_TYPE = IntRandomType
 
 
 def get_parser():
-    parser = OptionParser(version=__VERSION__)
+    usage = "usage: %prog [options]"
+    parser = OptionParser(usage=usage, version=__VERSION__)
     parser.add_option(
         '--int',
         action='store_true',
