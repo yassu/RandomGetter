@@ -2,7 +2,7 @@
 import random
 from optparse import OptionParser
 
-DEFAULT_RANDOM_TYPE = int
+DEFAULT_RANDOM_TYPE = None  # re-define after
 DEFAULT_RANDOM_LENGTH = 4
 DEFAULT_RANDOM_NUMBER = 1
 DEFAULT_LENGTH_TYPE = 0 # means not absolute
@@ -77,8 +77,28 @@ class StrRandomType(RandomType):
 
         return ran
 
+DEFAULT_RANDOM_TYPE = IntRandomType
+
 def get_parser():
     parser = OptionParser()
+    parser.add_option(
+        '--int',
+        action='store_true',
+        dest='is_int_random',
+        help='occur int random value'
+    )
+    parser.add_option(
+        '--str',
+        action='store_true',
+        dest='is_str_random',
+        help='occur str random value'
+    )
+    parser.add_option(
+        '--double',
+        action='store_true',
+        dest='is_double_random',
+        help='occur double random value'
+    )
     parser.add_option(
         '--number', '-n',
         type=int,
@@ -120,7 +140,17 @@ def get_random_result(options):
     if options.fo:
         return get_random_from_format(options.fo, options)
     else:
-        return IntRandomType(
+        random_type = None
+        if options.is_int_random:
+            random_type = IntRandomType
+        elif options.is_str_random:
+            random_type = StrRandomType
+        elif options.is_double_random:
+            random_type = DoubleRandomType
+        else:
+            random_type = DEFAULT_RANDOM_TYPE
+        print(random_type)
+        return random_type(
                 length=options.length,
                 min_value=options.min_int, max_value=options.max_int
                 ).get_random()
