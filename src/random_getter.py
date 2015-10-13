@@ -63,6 +63,20 @@ class IntRandomType(RandomType):
 
         return random.randint(min_value, max_value)
 
+class StrRandomType(RandomType):
+    def get_random(self):
+        if self.length == 0:
+            return ''
+
+        ran = ''
+        ran += random.choice(
+            'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_')
+        for _ in range(self.length - 1):
+            ran += random.choice(
+                'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_123456789')
+
+        return ran
+
 def get_parser():
     parser = OptionParser()
     parser.add_option(

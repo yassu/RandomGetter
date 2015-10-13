@@ -47,3 +47,14 @@ class IntRandomTestCase(TestCase):
     def get_random_test3(self):
         r = IntRandomType(max_value = -5*10**(DEFAULT_RANDOM_LENGTH - 1))
         assert(r.get_random() <= -5*10**(DEFAULT_RANDOM_LENGTH - 1))
+
+class StrRandomTypeTestCase(TestCase):
+    def get_random_test(self):
+        r = StrRandomType()
+        assert(len(r.get_random()) == DEFAULT_RANDOM_LENGTH)
+        assert(r.get_random()[0] in 'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_')
+        assert(r.get_random()[1] in 
+            'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_123456789')
+
+    def get_random_test2(self):
+        assert(len(StrRandomType(length=100).get_random()) == 100)
