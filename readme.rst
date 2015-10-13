@@ -2,7 +2,7 @@
 RandomGetter
 ==============
 
-This project provides a tools for getting various format or kind Random Value 
+This project provides a tools for getting various format or kind Random Value.
 
 How to Install
 ================
@@ -26,7 +26,7 @@ Usage
 
     $ random_getter.py [option]
 
-Note that no argument is required.
+Note that no arguments are required.
 
 For example,
 
