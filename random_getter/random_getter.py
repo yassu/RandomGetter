@@ -247,4 +247,4 @@ if __name__ == '__main__':
 
     for _ in range(random_number):
         ran = get_random_result(options)
-        print('ran: {}'.format(ran))
+        print(ran)
