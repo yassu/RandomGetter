@@ -10,6 +10,7 @@ setup(
     packages=['random_getter'],
     description=('This project provides a tools for getting various format or'
         'kind.'),
+    long_description=open("readme.rst").read(),
     url= 'https://github.com/yassu/RandomGetter',
     classifiers=[
         'Programming Language :: Python',
