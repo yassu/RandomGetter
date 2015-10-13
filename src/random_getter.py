@@ -8,6 +8,16 @@ DEFAULT_RANDOM_LENGTH = 4
 DEFAULT_RANDOM_NUMBER = 1
 DEFAULT_LENGTH_TYPE = 0 # means not absolute
 
+def get_random_from_format(fo, options):
+    while '[int]' in fo:
+        fo = fo.replace('[int]', str(IntRandomType(
+                length=options.length,
+                min_value=options.min_int, max_value=options.max_int
+                ).get_random()),
+                1
+            )
+    return fo
+
 class RandomType(object):
     DEFAULT_LENGTH = None
 
