@@ -82,6 +82,13 @@ def get_parser():
         help='length of random values(int, double or str)'
     )
     parser.add_option(
+        '--format', '-f',
+        type=str,
+        dest='fo',
+        default=None,
+        help='define used format'
+    )
+    parser.add_option(
         '--min-int',
         type=int,
         dest='min_int',
@@ -97,6 +104,15 @@ def get_parser():
     )
     return parser
 
+def get_random_result(options):
+    if options.fo:
+        return get_random_from_format(options.fo, options)
+    else:
+        return IntRandomType(
+                length=options.length,
+                min_value=options.min_int, max_value=options.max_int
+                ).get_random()
+
 if __name__ == '__main__':
     (options, _) = get_parser().parse_args()
     print(options)
@@ -107,8 +123,5 @@ if __name__ == '__main__':
 
     if defalt_random_type == int:
         for _ in range(random_number):
-            ran = IntRandomType(
-                length=options.length,
-                min_value=options.min_int, max_value=options.max_int
-                ).get_random()
+            ran = get_random_result(options)
             print(ran)
