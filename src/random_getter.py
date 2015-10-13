@@ -5,21 +5,23 @@ from optparse import OptionParser
 DEFAULT_RANDOM_TYPE = None  # re-define after
 DEFAULT_RANDOM_LENGTH = 4
 DEFAULT_RANDOM_NUMBER = 1
-DEFAULT_LENGTH_TYPE = 0 # means not absolute
+DEFAULT_LENGTH_TYPE = 0  # means not absolute
+
 
 def get_random_from_format(fo, options):
     for kind in ('int', 'str', 'double'):
         kind_element = '[{}]'.format(kind)
         kind_random_type = {'int': IntRandomType, 'str': StrRandomType,
-            'double': DoubleRandomType}[kind]
+                            'double': DoubleRandomType}[kind]
         while kind_element in fo:
             fo = fo.replace(kind_element, str(kind_random_type(
-                    length=options.length,
-                    min_value=options.min_int, max_value=options.max_int
-                    ).get_random()),
-                    1
-                )
+                length=options.length,
+                min_value=options.min_int, max_value=options.max_int
+            ).get_random()),
+                1
+            )
     return fo
+
 
 class RandomType(object):
     DEFAULT_LENGTH = None
@@ -44,7 +46,9 @@ class RandomType(object):
     def get_random(self):
         pass
 
+
 class IntRandomType(RandomType):
+
     def get_random(self):
         # consider min_value, max_value and length
         # (TODO: case absolute length type)
@@ -62,7 +66,9 @@ class IntRandomType(RandomType):
 
         return random.randint(min_value, max_value)
 
+
 class StrRandomType(RandomType):
+
     def get_random(self):
         if self.length == 0:
             return ''
@@ -76,10 +82,12 @@ class StrRandomType(RandomType):
 
         return ran
 
+
 class DoubleRandomType(RandomType):
+
     def get_random(self):
         int_ran = str(IntRandomType(length=self.length,
-            min_value=self.min_value, max_value=self.max_value).get_random())
+                                    min_value=self.min_value, max_value=self.max_value).get_random())
 
         if int_ran.startswith('-'):
             is_neg = True
@@ -101,6 +109,7 @@ class DoubleRandomType(RandomType):
         return ran
 
 DEFAULT_RANDOM_TYPE = IntRandomType
+
 
 def get_parser():
     parser = OptionParser()
@@ -159,6 +168,7 @@ def get_parser():
     )
     return parser
 
+
 def get_random_result(options):
     if options.fo:
         return get_random_from_format(options.fo, options)
@@ -174,9 +184,9 @@ def get_random_result(options):
             random_type = DEFAULT_RANDOM_TYPE
         print(random_type)
         return random_type(
-                length=options.length,
-                min_value=options.min_int, max_value=options.max_int
-                ).get_random()
+            length=options.length,
+            min_value=options.min_int, max_value=options.max_int
+        ).get_random()
 
 if __name__ == '__main__':
     (options, _) = get_parser().parse_args()
