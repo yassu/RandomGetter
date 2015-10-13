@@ -1,5 +1,6 @@
 # coding: UTF-8
 import random
+import re
 from optparse import OptionParser
 
 DEFAULT_RANDOM_TYPE = None  # re-define after
@@ -12,20 +13,45 @@ def get_random_from_format(fo, options):
         kind_element = '[{}]'.format(kind)
         kind_random_type = {'int': IntRandomType, 'str': StrRandomType,
                             'double': DoubleRandomType}[kind]
-        while kind_element in fo:
-            min_kind = getattr(options, {'int': 'min_int', 'double':
-                'min_double', 'str': 'min_str'}[kind])
-            max_kind = getattr(options, {'int': 'max_int', 'double':
-                'max_double', 'str': 'max_str'}[kind])
-            fo = fo.replace(kind_element,
+
+        double_pat = r'[+-]?[0-9]*[\.]?[0-9]+'
+        kind_element_pat = r'\[{}*({})?(:{})?\]'.format(
+            kind, double_pat, double_pat)
+        kind_element_match = re.search(kind_element_pat, fo)
+        while kind_element_match:
+            if kind in ('int', 'double'):
+                min_kind = getattr(options, {'int': 'min_int', 'double':
+                    'min_double'}[kind])
+                max_kind = getattr(options, {'int': 'max_int', 'double':
+                    'max_double'}[kind])
+
+            element_min, element_max = kind_element_match.groups()
+            if element_min is not None and kind == 'int':
+                min_kind = int(element_min)
+            elif element_min is not None and kind == 'double':
+                min_kind = float(element_min)
+
+            if element_max is not None and kind == 'int':
+                element_max = element_max[1:]   # delete ":"
+                max_kind = int(element_max)
+            elif element_max is not None and kind == 'double':
+                element_max = element_max[1:]
+                max_kind = float(element_max)
+            elif kind == 'str':
+                min_kind = max_kind = None
+
+            fo = re.sub(kind_element_pat,
                 str(kind_random_type(
                     length=options.length,
                     min_value=min_kind, max_value=max_kind
                 ).get_random()),
+                    fo,
                     1
                 )
+            # print(kind_element_match)
+            print(fo, kind_element)
+            kind_element_match = re.search(kind_element_pat, fo)
     return fo
-
 
 class RandomType(object):
     DEFAULT_LENGTH = None
