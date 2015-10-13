@@ -56,7 +56,6 @@ class IntRandomType(RandomType):
 
     def get_random(self):
         # consider min_value, max_value and length
-        # (TODO: case absolute length type)
         if self.min_value is None:
             min_value = -(10**self.length - 1)
         else:
