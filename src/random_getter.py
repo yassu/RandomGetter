@@ -51,6 +51,9 @@ class RandomType(object):
     def get_random(self):
         pass
 
+    def __eq__(self, other):
+        return isinstance(other, self.__class__)
+
 
 class IntRandomType(RandomType):
 
@@ -90,6 +93,7 @@ class StrRandomType(RandomType):
 class DoubleRandomType(RandomType):
 
     def get_random(self):
+        print(self.min_value)
         int_ran = str(IntRandomType(
             length=self.length, min_value=self.min_value,
             max_value=self.max_value).get_random())
@@ -166,7 +170,7 @@ def get_parser():
     )
     parser.add_option(
         '--min-double',
-        type=double,
+        type=float,
         dest='min_double',
         default=None,
         help='minimal value of random double values'
@@ -177,6 +181,13 @@ def get_parser():
         dest='max_int',
         default=None,
         help='maximum value of random int values'
+    )
+    parser.add_option(
+        '--max-double',
+        type=float,
+        dest='max_double',
+        default=None,
+        help='maximal value of random double values'
     )
     return parser
 
