@@ -72,6 +72,30 @@ class StrRandomType(RandomType):
 
         return ran
 
+class DoubleRandomType(RandomType):
+    def get_random(self):
+        int_ran = str(IntRandomType(length=self.length,
+            min_value=self.min_value, max_value=self.max_value).get_random())
+
+        if int_ran.startswith('-'):
+            is_neg = True
+            int_ran = int_ran[1:]
+        else:
+            is_neg = False
+
+        dot_ind = random.randint(0, len(int_ran) - 1)
+        print('dot_ind: {}'.format(dot_ind))
+        if dot_ind == 0:
+            ran = '0.' + int_ran
+        elif dot_ind == len(int_ran) - 1:
+            ran = int_ran + '.0'
+        else:
+            ran = int_ran[:dot_ind] + '.' + int_ran[dot_ind:]
+
+        if is_neg:
+            ran = '-' + ran
+        return ran
+
 DEFAULT_RANDOM_TYPE = IntRandomType
 
 def get_parser():
@@ -159,4 +183,4 @@ if __name__ == '__main__':
 
     for _ in range(random_number):
         ran = get_random_result(options)
-        print(ran)
+        print('ran: {}'.format(ran))
