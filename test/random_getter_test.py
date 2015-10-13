@@ -1,12 +1,12 @@
 # coding: UTF-8
 
-from sys import path
-path.append('src')
+import sys
+sys.path.append('src')
 from random_getter import *
-from unittest import TestCase
+import unittest
 
 
-class RandomTypeTestCase(TestCase):
+class RandomTypeTestCase(unittest.TestCase):
 
     def length_test(self):
         r = RandomType()
@@ -33,7 +33,7 @@ class RandomTypeTestCase(TestCase):
         assert(r.max_value == 100)
 
 
-class IntRandomTestCase(TestCase):
+class IntRandomTestCase(unittest.TestCase):
 
     def get_random_test(self):
         r = IntRandomType()

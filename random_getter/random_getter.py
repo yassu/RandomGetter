@@ -8,8 +8,10 @@ DEFAULT_RANDOM_TYPE = None  # re-define after
 DEFAULT_RANDOM_LENGTH = 4
 DEFAULT_RANDOM_NUMBER = 1
 
+
 class IntRandomRangeException(Exception):
     pass
+
 
 class DoubleRandomRangeException(Exception):
     pass
@@ -17,7 +19,6 @@ class DoubleRandomRangeException(Exception):
 
 def get_random_from_format(fo, options):
     for kind in ('int', 'str', 'double'):
-        kind_element = '[{}]'.format(kind)
         kind_random_type = {'int': IntRandomType, 'str': StrRandomType,
                             'double': DoubleRandomType}[kind]
 
@@ -28,9 +29,9 @@ def get_random_from_format(fo, options):
         while kind_element_match:
             if kind in ('int', 'double'):
                 min_kind = getattr(options, {'int': 'min_int', 'double':
-                    'min_double'}[kind])
+                                             'min_double'}[kind])
                 max_kind = getattr(options, {'int': 'max_int', 'double':
-                    'max_double'}[kind])
+                                             'max_double'}[kind])
 
             element_min, element_max = kind_element_match.groups()
             if element_min is not None and kind == 'int':
@@ -48,17 +49,18 @@ def get_random_from_format(fo, options):
                 min_kind = max_kind = None
 
             fo = re.sub(kind_element_pat,
-                str(kind_random_type(
-                    length=options.length,
-                    min_value=min_kind, max_value=max_kind
-                ).get_random()),
-                    fo,
-                    1
-                )
+                        str(kind_random_type(
+                            length=options.length,
+                            min_value=min_kind, max_value=max_kind
+                        ).get_random()),
+                        fo,
+                        1
+                        )
             # print(kind_element_match)
             # print(fo, kind_element)
             kind_element_match = re.search(kind_element_pat, fo)
     return fo
+
 
 class RandomType(object):
     DEFAULT_LENGTH = None
@@ -147,10 +149,10 @@ class DoubleRandomType(RandomType):
 
         if min_value > max_value:
             raise DoubleRandomRangeException("{} > {}".format(min_value,
-                max_value))
+                                                              max_value))
 
         t = random.random()
-        return (max_value - min_value)*t + min_value
+        return (max_value - min_value) * t + min_value
 
 DEFAULT_RANDOM_TYPE = IntRandomType
 
@@ -249,11 +251,13 @@ def get_random_result(options):
         else:
             random_type = DEFAULT_RANDOM_TYPE
         min_value = getattr(options, {IntRandomType: 'min_int',
-            DoubleRandomType: 'min_double', StrRandomType: 'min_str'}
-                [random_type])
+                                      DoubleRandomType: 'min_double',
+                                      StrRandomType: 'min_str'}
+                            [random_type])
         max_value = getattr(options, {IntRandomType: 'max_int',
-            DoubleRandomType: 'max_double', StrRandomType: 'max_str'}
-                [random_type])
+                                      DoubleRandomType: 'max_double',
+                                      StrRandomType: 'max_str'}
+                            [random_type])
         return random_type(
             length=options.length,
             min_value=min_value, max_value=max_value
@@ -273,7 +277,7 @@ if __name__ == '__main__':
             ran = get_random_result(options)
             print(ran)
     except (IntRandomRangeException, DoubleRandomRangeException) as ex:
-            print("Error: {}".format(ex.message))
+        print("Error: {}".format(ex.message))
     except Exception as e:
         if options.debug:
             traceback.print_exc()
