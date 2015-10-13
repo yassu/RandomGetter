@@ -49,7 +49,7 @@ def get_random_from_format(fo, options):
                     1
                 )
             # print(kind_element_match)
-            print(fo, kind_element)
+            # print(fo, kind_element)
             kind_element_match = re.search(kind_element_pat, fo)
     return fo
 
@@ -237,8 +237,10 @@ def get_random_result(options):
         ).get_random()
 
 if __name__ == '__main__':
-    (options, _) = get_parser().parse_args()
-    print(options)
+    (options, args) = get_parser().parse_args()
+    if args:
+        print('warning: no require argument')
+    # print(options)
 
     random_number = options.number
     random_length = options.length
