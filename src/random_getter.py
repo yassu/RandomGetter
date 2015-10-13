@@ -79,6 +79,13 @@ def get_parser():
         default=None,
         help='minimal value of random int values'
     )
+    parser.add_option(
+        '--max-int',
+        type=int,
+        dest='max_int',
+        default=None,
+        help='maximum value of random int values'
+    )
     return parser
 
 if __name__ == '__main__':
@@ -93,5 +100,6 @@ if __name__ == '__main__':
         for _ in range(random_number):
             ran = IntRandomType(
                 length=options.length,
-                min_value=options.min_int).get_random()
+                min_value=options.min_int, max_value=options.max_int
+                ).get_random()
             print(ran)
