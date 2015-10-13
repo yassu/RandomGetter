@@ -38,3 +38,12 @@ class IntRandomTestCase(TestCase):
         assert(
             -10**(DEFAULT_RANDOM_LENGTH + 1) < r.get_random() <
                 10**(DEFAULT_RANDOM_LENGTH + 1))
+
+    def get_random_test2(self):
+        r = IntRandomType(min_value=5*10**DEFAULT_RANDOM_LENGTH)
+        assert(5*10**DEFAULT_RANDOM_LENGTH < r.get_random() <
+        10**(DEFAULT_RANDOM_LENGTH + 1))
+
+    def get_random_test3(self):
+        r = IntRandomType(max_value = -5*10**DEFAULT_RANDOM_LENGTH)
+        assert(r.get_random() <= -5*10**DEFAULT_RANDOM_LENGTH)
