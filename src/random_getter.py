@@ -42,13 +42,13 @@ class IntRandomType(RandomType):
         # consider min_value, max_value and length
         # (TODO: case absolute length type)
         if self.min_value is None:
-            min_value = -(10**(self.length + 1) - 1)
+            min_value = -(10**self.length - 1)
         else:
             min_value = self.min_value
         # TODO: if min_value < -10**(self.length + 1), raise error
 
         if self.max_value is None:
-            max_value = 10**(self.length + 1) - 1
+            max_value = 10**self.length - 1
         else:
             max_value = self.max_value
         # TODO: if max_value > 10** (self.length + 1), lraise error
@@ -61,5 +61,5 @@ if __name__ == '__main__':
 
     if defalt_random_type == int:
         for _ in range(random_number):
-            print(random.randint(-10**(DEFAULT_RANDOM_LENGTH - 1),
-                10**(DEFAULT_RANDOM_LENGTH - 1)))
+            ran = IntRandomType().get_random()
+            print(ran)
