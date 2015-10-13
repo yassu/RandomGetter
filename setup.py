@@ -4,6 +4,9 @@ from setuptools import setup
 setup(
     name='RandomGetter',
     version='0.0.1',
+    author='yassu',
+    author_email="mathyassu@gmail.com",
+
     packages=['random_getter'],
     description=('This project provides a tools for getting various format or'
         'kind.'),
@@ -19,11 +22,9 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    author_email="mathyassu@gmail.com",
     license=(
         'Released Under the Apache license\n'
         'https://github.com/yassu/RandomGetter\n'
     ),
     scripts=['random_getter/random_getter.py']
-
 )
