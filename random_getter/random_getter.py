@@ -8,6 +8,12 @@ DEFAULT_RANDOM_TYPE = None  # re-define after
 DEFAULT_RANDOM_LENGTH = 4
 DEFAULT_RANDOM_NUMBER = 1
 
+class IntRandomRangeException(Exception):
+    pass
+
+class DoubleRandomRangeException(Exception):
+    pass
+
 
 def get_random_from_format(fo, options):
     for kind in ('int', 'str', 'double'):
@@ -98,6 +104,10 @@ class IntRandomType(RandomType):
             max_value = self.max_value
         # TODO: if max_value > 10** (self.length + 1), lraise error
 
+        if min_value > max_value:
+            raise IntRandomRangeException('{} > {}'.format(
+                min_value, max_value))
+
         return random.randint(min_value, max_value)
 
 
@@ -134,6 +144,10 @@ class DoubleRandomType(RandomType):
         else:
             max_value = self.max_value
         # TODO: if max_value > 10** (self.length + 1), lraise error
+
+        if min_value > max_value:
+            raise DoubleRandomRangeException("{} > {}".format(min_value,
+                max_value))
 
         t = random.random()
         return (max_value - min_value)*t + min_value
@@ -247,6 +261,11 @@ if __name__ == '__main__':
     random_number = options.number
     random_length = options.length
 
-    for _ in range(random_number):
-        ran = get_random_result(options)
-        print(ran)
+    try:
+        for _ in range(random_number):
+            ran = get_random_result(options)
+            print(ran)
+    except (IntRandomRangeException, DoubleRandomRangeException) as ex:
+        print("Error: {}".format(ex.message))
+    except:
+        print("Illegal Error")
