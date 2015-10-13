@@ -41,11 +41,6 @@ class RandomType(object):
         pass
 
 class IntRandomType(RandomType):
-    def __init__(self, length=DEFAULT_RANDOM_LENGTH, min_value=None,
-            max_value=None):
-        RandomType.__init__(self, length=length, min_value=min_value,
-        max_value=max_value)
-
     def get_random(self):
         # consider min_value, max_value and length
         # (TODO: case absolute length type)
