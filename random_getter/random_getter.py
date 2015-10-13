@@ -98,13 +98,11 @@ class IntRandomType(RandomType):
             min_value = -(10**self.length - 1)
         else:
             min_value = self.min_value
-        # TODO: if min_value < -10**(self.length + 1), raise error
 
         if self.max_value is None:
             max_value = 10**self.length - 1
         else:
             max_value = self.max_value
-        # TODO: if max_value > 10** (self.length + 1), lraise error
 
         if min_value > max_value:
             raise IntRandomRangeException('{} > {}'.format(
