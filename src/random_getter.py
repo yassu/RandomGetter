@@ -129,11 +129,9 @@ if __name__ == '__main__':
     (options, _) = get_parser().parse_args()
     print(options)
 
-    defalt_random_type = int
     random_number = options.number
     random_length = options.length
 
-    if defalt_random_type == int:
-        for _ in range(random_number):
-            ran = get_random_result(options)
-            print(ran)
+    for _ in range(random_number):
+        ran = get_random_result(options)
+        print(ran)
