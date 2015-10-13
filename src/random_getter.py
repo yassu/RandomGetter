@@ -1,5 +1,6 @@
 # coding: UTF-8
 import random
+from optparse import OptionParser
 
 DEFAULT_RANDOM_TYPE = int
 DEFAULT_RANDOM_FORMAT = '[ran]'
@@ -55,9 +56,23 @@ class IntRandomType(RandomType):
 
         return random.randint(min_value, max_value)
 
+def get_parser():
+    parser = OptionParser()
+    parser.add_option(
+        '--number', '-n',
+        type=int,
+        dest='number',
+        default=DEFAULT_RANDOM_NUMBER,
+        help='number of random results'
+    )
+    return parser
+
 if __name__ == '__main__':
+    (options, _) = get_parser().parse_args()
+    # print(options)
+
     defalt_random_type = int
-    random_number = DEFAULT_RANDOM_NUMBER
+    random_number = options.number
 
     if defalt_random_type == int:
         for _ in range(random_number):
