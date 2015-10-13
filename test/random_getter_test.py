@@ -35,4 +35,6 @@ class RandomTypeTestCase(TestCase):
 class IntRandomTestCase(TestCase):
     def get_random_test(self):
         r = IntRandomType()
-        assert(- 10**5 < r.get_random() < 10**5)
+        assert(
+            -10**(DEFAULT_RANDOM_LENGTH + 1) < r.get_random() <
+                10**(DEFAULT_RANDOM_LENGTH + 1))

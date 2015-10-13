@@ -41,11 +41,14 @@ class IntRandomType(RandomType):
     def get_random(self):
         # consider min_value, max_value and length
         # (TODO: case absolute length type)
-        min_value = -(10**(self.length + 1) - 1)
+        if self.min_value is None:
+            min_value = -(10**(self.length + 1) - 1)
+        # TODO: if min_value < -10**(self.length + 1), raise error
+
         if self.max_value is None:
             max_value = 10**(self.length + 1) - 1
-        else:
-            max_value = min(self.max_value, 10**(self.length + 1) - 1)
+        # TODO: if max_value > 10** (self.length + 1), lraise error
+
         return random.randint(min_value, max_value)
 
 if __name__ == '__main__':
