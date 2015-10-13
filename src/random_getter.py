@@ -41,8 +41,6 @@ class RandomType(object):
         pass
 
 class IntRandomType(RandomType):
-    DEFAULT_LENGTH = 4
-
     def __init__(self, length=DEFAULT_RANDOM_LENGTH, min_value=None,
             max_value=None):
         RandomType.__init__(self, length=length, min_value=min_value,
