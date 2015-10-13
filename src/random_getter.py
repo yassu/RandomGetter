@@ -17,12 +17,13 @@ def get_random_from_format(fo, options):
                 'min_double', 'str': 'min_str'}[kind])
             max_kind = getattr(options, {'int': 'max_int', 'double':
                 'max_double', 'str': 'max_str'}[kind])
-            fo = fo.replace(kind_element, str(kind_random_type(
-                length=options.length,
-                min_value=min_kind, max_value=max_kind
-            ).get_random()),
-                1
-            )
+            fo = fo.replace(kind_element,
+                str(kind_random_type(
+                    length=options.length,
+                    min_value=min_kind, max_value=max_kind
+                ).get_random()),
+                    1
+                )
     return fo
 
 
