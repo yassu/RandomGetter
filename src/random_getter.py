@@ -65,16 +65,24 @@ def get_parser():
         default=DEFAULT_RANDOM_NUMBER,
         help='number of random results'
     )
+    parser.add_option(
+        '--length', '-l',
+        type=int,
+        dest='length',
+        default=DEFAULT_RANDOM_LENGTH,
+        help='length of random values(int, double or str)'
+    )
     return parser
 
 if __name__ == '__main__':
     (options, _) = get_parser().parse_args()
-    # print(options)
+    print(options)
 
     defalt_random_type = int
     random_number = options.number
+    random_length = options.length
 
     if defalt_random_type == int:
         for _ in range(random_number):
-            ran = IntRandomType().get_random()
+            ran = IntRandomType(length=options.length).get_random()
             print(ran)
