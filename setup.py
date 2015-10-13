@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='RandomGetter',
-    version='0.0.1',
+    version='0.0.2',
     author='yassu',
     author_email="mathyassu@gmail.com",
 
