@@ -267,5 +267,5 @@ if __name__ == '__main__':
             print(ran)
     except (IntRandomRangeException, DoubleRandomRangeException) as ex:
         print("Error: {}".format(ex.message))
-    except:
+    except Exception:
         print("Illegal Error")
