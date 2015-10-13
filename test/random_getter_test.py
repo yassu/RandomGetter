@@ -3,7 +3,6 @@
 from sys import path
 path.append('src')
 from random_getter import *
-
 from unittest import TestCase
 
 
@@ -11,7 +10,6 @@ class RandomTypeTestCase(TestCase):
 
     def length_test(self):
         r = RandomType()
-        print(r.length)
         assert(r.length == DEFAULT_RANDOM_LENGTH)
 
     def length_test2(self):

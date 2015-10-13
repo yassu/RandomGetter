@@ -26,7 +26,8 @@ def get_random_from_format(fo, options):
 class RandomType(object):
     DEFAULT_LENGTH = None
 
-    def __init__(self, length=DEFAULT_RANDOM_LENGTH, min_value=None, max_value=None):
+    def __init__(self, length=DEFAULT_RANDOM_LENGTH,
+                 min_value=None, max_value=None):
         self._length = length
         self._min_value = min_value
         self._max_value = max_value
@@ -87,7 +88,8 @@ class DoubleRandomType(RandomType):
 
     def get_random(self):
         int_ran = str(IntRandomType(length=self.length,
-                                    min_value=self.min_value, max_value=self.max_value).get_random())
+                                    min_value=self.min_value, max_value=self.max_value
+                                    ).get_random())
 
         if int_ran.startswith('-'):
             is_neg = True
