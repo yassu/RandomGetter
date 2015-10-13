@@ -72,6 +72,13 @@ def get_parser():
         default=DEFAULT_RANDOM_LENGTH,
         help='length of random values(int, double or str)'
     )
+    parser.add_option(
+        '--min-int',
+        type=int,
+        dest='min_int',
+        default=None,
+        help='minimal value of random int values'
+    )
     return parser
 
 if __name__ == '__main__':
@@ -84,5 +91,7 @@ if __name__ == '__main__':
 
     if defalt_random_type == int:
         for _ in range(random_number):
-            ran = IntRandomType(length=options.length).get_random()
+            ran = IntRandomType(
+                length=options.length,
+                min_value=options.min_int).get_random()
             print(ran)
