@@ -5,7 +5,6 @@ from optparse import OptionParser
 DEFAULT_RANDOM_TYPE = None  # re-define after
 DEFAULT_RANDOM_LENGTH = 4
 DEFAULT_RANDOM_NUMBER = 1
-DEFAULT_LENGTH_TYPE = 0  # means not absolute
 
 
 def get_random_from_format(fo, options):
