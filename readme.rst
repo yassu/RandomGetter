@@ -25,11 +25,11 @@ For example,
 ::
 
     $ random_getter.py -f "([double], [str])"
-    ran: (-690.8986415091822, _m_c)
+    (-690.8986415091822, _m_c)
     $ random_getter.py -f "([int-10:10], [double:3])"
-    ran: (0, -5363.877296867747)
+    (0, -5363.877296867747)
     $ random_getter.py
-    ran: -1603
+    -1603
 
 License
 =========
