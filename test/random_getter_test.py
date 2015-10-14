@@ -151,3 +151,22 @@ class DoubleRandomTypeTestCase(unittest.TestCase):
     def get_random_test3(self):
         r = DoubleRandomType(min_value=0)
         assert(r.get_random() >= 0)
+
+def get_random_type_from_options_test():
+    options = DEFAULT_OPTIONS
+    options.is_int_random = True
+    assert(get_random_type_from_options(options) == IntRandomType)
+
+def get_random_type_from_options_test2():
+    options = DEFAULT_OPTIONS
+    options.is_str_random = True
+    assert(get_random_type_from_options(options) == StrRandomType)
+
+def get_random_type_from_options_test3():
+    options = DEFAULT_OPTIONS
+    options.is_double_random = True
+    assert(get_random_type_from_options(options) == DoubleRandomType)
+
+def get_random_type_from_options_test4():
+    options = DEFAULT_OPTIONS
+    assert(get_random_type_from_options(options) == DEFAULT_RANDOM_TYPE)
