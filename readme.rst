@@ -52,6 +52,8 @@ random number < 10**4 - 1.
 * `--double`: occur `double` random value
 * `-n, --number`: indicate number of random values
 * `-l, --length`: indicate length of random values
+* `--min`: indicate default minimal value
+* `--max`: indicate default maximal value
 * `--min-int`: indicate minimal value of random int values
 * `--max-int`: indicate maximal value of random int values
 * `--min-double`: indicate minimal value of random double values
