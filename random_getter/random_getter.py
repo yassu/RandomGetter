@@ -18,7 +18,8 @@ class DoubleRandomRangeException(Exception):
     pass
 
 
-def get_random_from_format(fo, options):
+def get_random_from_format(options):
+    fo = options.fo
     for kind in ('int', 'str', 'double'):
         kind_random_type = {'int': IntRandomType, 'str': StrRandomType,
                             'double': DoubleRandomType}[kind]
@@ -285,7 +286,7 @@ def get_max_value_from_options(options):
 
 def get_random_result(options):
     if options.fo:
-        return get_random_from_format(options.fo, options)
+        return get_random_from_format(options)
     else:
         random_type = get_random_type_from_options(options)
         min_value = get_min_value_from_options(options)

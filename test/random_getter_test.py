@@ -10,7 +10,7 @@ DEFAULT_OPTIONS, _ = get_parser().parse_args()
 def get_random_from_format_test():
     options = DEFAULT_OPTIONS
     options.fo = "[int]"
-    res = get_random_from_format(options.fo, options)
+    res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
     res = int(res)
     assert(-10**(DEFAULT_RANDOM_LENGTH + 1) <
@@ -21,7 +21,7 @@ def get_random_from_format_test2():  # sometimes not passing
     options = DEFAULT_OPTIONS
     options.fo = "[int]"
     options._max = 0
-    res = get_random_from_format(options.fo, options)
+    res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
     res = int(res)
     assert(res <= 0)
@@ -30,7 +30,7 @@ def get_random_from_format_test2():  # sometimes not passing
 def get_random_from_format_test3():
     options = DEFAULT_OPTIONS
     options.fo = "[int0]"
-    res = get_random_from_format(options.fo, options)
+    res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
     res = int(res)
     assert(res >= 0)
@@ -39,7 +39,7 @@ def get_random_from_format_test3():
 def get_random_from_format_test4():
     options = DEFAULT_OPTIONS
     options.fo = "[int:100]"
-    res = get_random_from_format(options.fo, options)
+    res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
     res = int(res)
     assert(res <= 100)
@@ -48,7 +48,7 @@ def get_random_from_format_test4():
 def get_random_from_format_test5():
     options = DEFAULT_OPTIONS
     options.fo = "[int0:100]"
-    res = get_random_from_format(options.fo, options)
+    res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
     res = int(res)
     assert(0 <= res <= 100)
@@ -57,7 +57,7 @@ def get_random_from_format_test5():
 def get_random_from_format_test6():
     options = DEFAULT_OPTIONS
     options.fo = "[double0]"
-    res = get_random_from_format(options.fo, options)
+    res = get_random_from_format(options)
 
     assert(re.search(r'[+-]?[0-9]*[\.]?[0-9]+', res))
     res = float(res)
@@ -67,7 +67,7 @@ def get_random_from_format_test6():
 def get_random_from_format_test6():
     options = DEFAULT_OPTIONS
     options.fo = "[double:100]"
-    res = get_random_from_format(options.fo, options)
+    res = get_random_from_format(options)
 
     assert(re.search(r'[+-]?[0-9]*[\.]?[0-9]+', res))
     res = float(res)
@@ -77,7 +77,7 @@ def get_random_from_format_test6():
 def get_random_from_format_test7():
     options = DEFAULT_OPTIONS
     options.fo = "[double0:100]"
-    res = get_random_from_format(options.fo, options)
+    res = get_random_from_format(options)
 
     assert(re.search(r'[+-]?[0-9]*[\.]?[0-9]+', res))
     res = float(res)
