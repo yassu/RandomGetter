@@ -160,7 +160,6 @@ def get_random_type_from_options_test():
 def get_random_type_from_options_test2():
     options, _ = get_parser().parse_args()
     options.is_str_random = True
-    print(options)
     assert(get_random_type_from_options(options) == StrRandomType)
 
 def get_random_type_from_options_test3():
