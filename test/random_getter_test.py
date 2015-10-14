@@ -61,3 +61,20 @@ class StrRandomTypeTestCase(unittest.TestCase):
 
     def get_random_test2(self):
         assert(len(StrRandomType(length=100).get_random()) == 100)
+
+
+class DoubleRandomTypeTestCase(unittest.TestCase):
+
+    def get_random_test(self):
+        r = DoubleRandomType()
+        assert(
+            -10**(DEFAULT_RANDOM_LENGTH + 1) < r.get_random() <
+            10**(DEFAULT_RANDOM_LENGTH + 1))
+
+    def get_random_test2(self):
+        r = DoubleRandomType(max_value=0)
+        assert(r.get_random() <= 0)
+
+    def get_random_test3(self):
+        r = DoubleRandomType(min_value=0)
+        assert(r.get_random() >= 0)
