@@ -6,15 +6,18 @@ import re
 
 DEFAULT_OPTIONS, _ = get_parser().parse_args()
 
+
 def get_random_from_format_test():
     options = DEFAULT_OPTIONS
     options.fo = "[int]"
     res = get_random_from_format(options.fo, options)
     assert(re.search(r'(-)?\d+', res))
     res = int(res)
-    assert(-10**(DEFAULT_RANDOM_LENGTH + 1) < res < 10**(DEFAULT_RANDOM_LENGTH + 1))
+    assert(-10**(DEFAULT_RANDOM_LENGTH + 1) <
+           res < 10**(DEFAULT_RANDOM_LENGTH + 1))
 
-def get_random_from_format_test2(): # sometimes not passing
+
+def get_random_from_format_test2():  # sometimes not passing
     options = DEFAULT_OPTIONS
     options.fo = "[int]"
     options._max = 0
@@ -22,6 +25,7 @@ def get_random_from_format_test2(): # sometimes not passing
     assert(re.search(r'(-)?\d+', res))
     res = int(res)
     assert(res <= 0)
+
 
 def get_random_from_format_test3():
     options = DEFAULT_OPTIONS
@@ -31,6 +35,7 @@ def get_random_from_format_test3():
     res = int(res)
     assert(res >= 0)
 
+
 def get_random_from_format_test4():
     options = DEFAULT_OPTIONS
     options.fo = "[int:100]"
@@ -39,6 +44,7 @@ def get_random_from_format_test4():
     res = int(res)
     assert(res <= 100)
 
+
 def get_random_from_format_test5():
     options = DEFAULT_OPTIONS
     options.fo = "[int0:100]"
@@ -46,6 +52,7 @@ def get_random_from_format_test5():
     assert(re.search(r'(-)?\d+', res))
     res = int(res)
     assert(0 <= res <= 100)
+
 
 def get_random_from_format_test6():
     options = DEFAULT_OPTIONS
@@ -56,6 +63,7 @@ def get_random_from_format_test6():
     res = float(res)
     assert(res >= 0)
 
+
 def get_random_from_format_test6():
     options = DEFAULT_OPTIONS
     options.fo = "[double:100]"
@@ -65,6 +73,7 @@ def get_random_from_format_test6():
     res = float(res)
     assert(res <= 100)
 
+
 def get_random_from_format_test7():
     options = DEFAULT_OPTIONS
     options.fo = "[double0:100]"
@@ -73,6 +82,7 @@ def get_random_from_format_test7():
     assert(re.search(r'[+-]?[0-9]*[\.]?[0-9]+', res))
     res = float(res)
     assert(0 <= res <= 100)
+
 
 class RandomTypeTestCase(unittest.TestCase):
 
@@ -152,21 +162,73 @@ class DoubleRandomTypeTestCase(unittest.TestCase):
         r = DoubleRandomType(min_value=0)
         assert(r.get_random() >= 0)
 
+
 def get_random_type_from_options_test():
     options, _ = get_parser().parse_args()
     options.is_int_random = True
     assert(get_random_type_from_options(options) == IntRandomType)
+
 
 def get_random_type_from_options_test2():
     options, _ = get_parser().parse_args()
     options.is_str_random = True
     assert(get_random_type_from_options(options) == StrRandomType)
 
+
 def get_random_type_from_options_test3():
     options, _ = get_parser().parse_args()
     options.is_double_random = True
     assert(get_random_type_from_options(options) == DoubleRandomType)
 
+
 def get_random_type_from_options_test4():
     options, _ = get_parser().parse_args()
     assert(get_random_type_from_options(options) == DEFAULT_RANDOM_TYPE)
+
+
+def get_min_value_from_options_test():
+    options, _ = get_parser().parse_args()
+    assert(get_min_value_from_options(options) is None)
+
+
+def get_min_value_from_options_test2():
+    options, _ = get_parser().parse_args()
+    options.min_int = 0
+    assert(get_min_value_from_options(options) == 0)
+
+
+def get_min_value_from_options_test3():
+    options, _ = get_parser().parse_args()
+    options._min = 0
+    assert(get_min_value_from_options(options) == 0)
+
+
+def get_min_value_from_options_test4():
+    options, _ = get_parser().parse_args()
+    options.min_int = 0
+    options._min = -100
+    assert(get_min_value_from_options(options) == -100)
+
+
+def get_max_value_from_options_test():
+    options, _ = get_parser().parse_args()
+    assert(get_max_value_from_options(options) is None)
+
+
+def get_max_value_from_options_test2():
+    options, _ = get_parser().parse_args()
+    options.max_int = 0
+    assert(get_max_value_from_options(options) == 0)
+
+
+def get_max_value_from_options_test3():
+    options, _ = get_parser().parse_args()
+    options._max = 0
+    assert(get_max_value_from_options(options) == 0)
+
+
+def get_max_value_from_options_test4():
+    options, _ = get_parser().parse_args()
+    options.max_int = 0
+    options._max = -100
+    assert(get_max_value_from_options(options) == -100)
