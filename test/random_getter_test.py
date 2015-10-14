@@ -1,8 +1,6 @@
 # coding: UTF-8
 
-import sys
-sys.path.append('src')
-from random_getter import *
+from random_getter.random_getter import *
 import unittest
 
 
@@ -51,7 +49,7 @@ class IntRandomTestCase(unittest.TestCase):
         assert(r.get_random() <= -5 * 10**(DEFAULT_RANDOM_LENGTH - 1))
 
 
-class StrRandomTypeTestCase(TestCase):
+class StrRandomTypeTestCase(unittest.TestCase):
 
     def get_random_test(self):
         r = StrRandomType()
