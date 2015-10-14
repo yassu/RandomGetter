@@ -2,6 +2,7 @@
 import random
 import re
 from optparse import OptionParser
+import sys
 import traceback
 
 __VERSION__ = '0.0.4'
@@ -311,9 +312,11 @@ if __name__ == '__main__':
             ran = get_random_result(options)
             print(ran)
     except (IntRandomRangeException, DoubleRandomRangeException) as ex:
-        print("Error: {}".format(ex.message))
-    except Exception as e:
+        sys.stderr.write("Error: {}".format(str(ex))
+            # str(ex) is a message of ex
+    except Exception as ex:
         if options.debug:
             traceback.print_exc()
         else:
-            print("%s" % e)
+            sys.stderr.write(str(ex))
+            # str(ex) is a message of ex
