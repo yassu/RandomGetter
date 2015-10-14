@@ -132,6 +132,9 @@ class StrRandomTypeTestCase(unittest.TestCase):
     def get_random_test2(self):
         assert(len(StrRandomType(length=100).get_random()) == 100)
 
+    def get_random_test3(self):
+        assert(StrRandomType(length=0).get_random() == '')
+
 
 class DoubleRandomTypeTestCase(unittest.TestCase):
 
