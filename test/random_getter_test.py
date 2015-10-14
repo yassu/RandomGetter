@@ -153,20 +153,21 @@ class DoubleRandomTypeTestCase(unittest.TestCase):
         assert(r.get_random() >= 0)
 
 def get_random_type_from_options_test():
-    options = DEFAULT_OPTIONS
+    options, _ = get_parser().parse_args()
     options.is_int_random = True
     assert(get_random_type_from_options(options) == IntRandomType)
 
 def get_random_type_from_options_test2():
-    options = DEFAULT_OPTIONS
+    options, _ = get_parser().parse_args()
     options.is_str_random = True
+    print(options)
     assert(get_random_type_from_options(options) == StrRandomType)
 
 def get_random_type_from_options_test3():
-    options = DEFAULT_OPTIONS
+    options, _ = get_parser().parse_args()
     options.is_double_random = True
     assert(get_random_type_from_options(options) == DoubleRandomType)
 
 def get_random_type_from_options_test4():
-    options = DEFAULT_OPTIONS
+    options, _ = get_parser().parse_args()
     assert(get_random_type_from_options(options) == DEFAULT_RANDOM_TYPE)
