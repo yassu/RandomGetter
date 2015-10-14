@@ -2,6 +2,7 @@
 import random
 import re
 from optparse import OptionParser
+import traceback
 
 __VERSION__ = '0.0.4'
 DEFAULT_RANDOM_TYPE = None  # re-define after
@@ -137,13 +138,11 @@ class DoubleRandomType(RandomType):
             min_value = -(10**self.length - 1)
         else:
             min_value = self.min_value
-        # TODO: if min_value < -10**(self.length + 1), raise error
 
         if self.max_value is None:
             max_value = 10**self.length - 1
         else:
             max_value = self.max_value
-        # TODO: if max_value > 10** (self.length + 1), lraise error
 
         if min_value > max_value:
             raise DoubleRandomRangeException("{} > {}".format(min_value,
@@ -249,32 +248,48 @@ def get_parser():
     return parser
 
 
+def get_random_type_from_options(options):
+    random_type = None
+    if options.is_int_random:
+        random_type = IntRandomType
+    elif options.is_str_random:
+        random_type = StrRandomType
+    elif options.is_double_random:
+        random_type = DoubleRandomType
+    else:
+        random_type = DEFAULT_RANDOM_TYPE
+    return random_type
+
+
+def get_min_value_from_options(options):
+    random_type = get_random_type_from_options(options)
+    min_value = getattr(options, {IntRandomType: 'min_int',
+                                  DoubleRandomType: 'min_double',
+                                  StrRandomType: 'min_str'}
+                        [random_type])
+    if not min_value:
+        min_value = options._min
+    return min_value
+
+
+def get_max_value_from_options(options):
+    random_type = get_random_type_from_options(options)
+    max_value = getattr(options, {IntRandomType: 'max_int',
+                                  DoubleRandomType: 'max_double',
+                                  StrRandomType: 'max_str'}
+                        [random_type])
+    if not max_value:
+        max_value = options._max
+    return max_value
+
+
 def get_random_result(options):
     if options.fo:
         return get_random_from_format(options.fo, options)
     else:
-        random_type = None
-        if options.is_int_random:
-            random_type = IntRandomType
-        elif options.is_str_random:
-            random_type = StrRandomType
-        elif options.is_double_random:
-            random_type = DoubleRandomType
-        else:
-            random_type = DEFAULT_RANDOM_TYPE
-
-        min_value = getattr(options, {IntRandomType: 'min_int',
-                                      DoubleRandomType: 'min_double',
-                                      StrRandomType: 'min_str'}
-                            [random_type])
-        if not min_value:
-            min_value = options._min
-        max_value = getattr(options, {IntRandomType: 'max_int',
-                                      DoubleRandomType: 'max_double',
-                                      StrRandomType: 'max_str'}
-                            [random_type])
-        if not max_value:
-            max_value = options._max
+        random_type = get_random_type_from_options(options)
+        min_value = get_min_value_from_options(options)
+        max_value = get_max_value_from_options(options)
 
         return random_type(
             length=options.length,
@@ -300,4 +315,4 @@ if __name__ == '__main__':
         if options.debug:
             traceback.print_exc()
         else:
-            error("%s" % e)
+            print("%s" % e)
