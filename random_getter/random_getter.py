@@ -198,6 +198,20 @@ def get_parser():
         help='define used format'
     )
     parser.add_option(
+        '--min',
+        type=float,
+        dest='_min',
+        default=None,
+        help='default minimal value'
+    )
+    parser.add_option(
+        '--max',
+        type=float,
+        dest='_max',
+        default=None,
+        help='default maximal value'
+    )
+    parser.add_option(
         '--min-int',
         type=int,
         dest='min_int',
@@ -248,14 +262,20 @@ def get_random_result(options):
             random_type = DoubleRandomType
         else:
             random_type = DEFAULT_RANDOM_TYPE
+
         min_value = getattr(options, {IntRandomType: 'min_int',
                                       DoubleRandomType: 'min_double',
                                       StrRandomType: 'min_str'}
                             [random_type])
+        if not min_value:
+            min_value = options._min
         max_value = getattr(options, {IntRandomType: 'max_int',
                                       DoubleRandomType: 'max_double',
                                       StrRandomType: 'max_str'}
                             [random_type])
+        if not max_value:
+            max_value = options._max
+
         return random_type(
             length=options.length,
             min_value=min_value, max_value=max_value
