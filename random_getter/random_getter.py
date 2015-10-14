@@ -312,7 +312,7 @@ if __name__ == '__main__':
             ran = get_random_result(options)
             print(ran)
     except (IntRandomRangeException, DoubleRandomRangeException) as ex:
-        sys.stderr.write("Error: {}".format(str(ex))
+        sys.stderr.write("Error: {}".format(str(ex)))
             # str(ex) is a message of ex
     except Exception as ex:
         if options.debug:
