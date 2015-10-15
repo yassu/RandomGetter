@@ -264,6 +264,7 @@ def get_random_type_from_options(options):
 
 
 def get_min_value_from_options(options):
+    # assume that randomtype in (IntRan, DoubleRan)
     random_type = get_random_type_from_options(options)
     min_value = getattr(options, {IntRandomType: 'min_int',
                                   DoubleRandomType: 'min_double',
@@ -290,9 +291,12 @@ def get_random_result(options):
         return get_random_from_format(options)
     else:
         random_type = get_random_type_from_options(options)
-        min_value = get_min_value_from_options(options)
-        max_value = get_max_value_from_options(options)
-
+        if random_type in (IntRandomType, DoubleRandomType):
+            min_value = get_min_value_from_options(options)
+            max_value = get_max_value_from_options(options)
+        else:   # StrRandomType
+            min_value = None
+            max_value = None
         return random_type(
             length=options.length,
             min_value=min_value, max_value=max_value
@@ -313,7 +317,7 @@ if __name__ == '__main__':
             print(ran)
     except (IntRandomRangeException, DoubleRandomRangeException) as ex:
         sys.stderr.write("Error: {}".format(str(ex)))
-            # str(ex) is a message of ex
+        # str(ex) is a message of ex
     except Exception as ex:
         if options.debug:
             traceback.print_exc()

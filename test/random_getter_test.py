@@ -232,3 +232,22 @@ def get_max_value_from_options_test4():
     options.max_int = 0
     options._max = -100
     assert(get_max_value_from_options(options) == -100)
+
+
+def get_random_result_test5():
+    # for str case 1
+    options, _ = get_parser().parse_args()
+    options.is_str_random = True
+    res = get_random_result(options)
+    assert(res[0] in 'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_')
+    assert(res[1] in
+           'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_123456789')
+
+
+def get_random_result_test6():
+    # for str case 2
+    options, _ = get_parser().parse_args()
+    options.is_str_random = True
+    options.length = 6
+    res = get_random_result(options)
+    assert(len(res) == 6)
