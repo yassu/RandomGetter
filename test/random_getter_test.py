@@ -18,13 +18,15 @@ def get_random_from_format_test():
 
 
 def get_random_from_format_test2():  # sometimes not passing
-    options = DEFAULT_OPTIONS
-    options.fo = "[int]"
-    options._max = 0
-    res = get_random_from_format(options)
-    assert(re.search(r'(-)?\d+', res))
-    res = int(res)
-    assert(res <= 0)
+    for _ in range(10):
+        options, _ = get_parser().parse_args()
+        options.fo = "[int]"
+        options._max = 0
+        print(options)
+        res = get_random_from_format(options)
+        assert(re.search(r'(-)?\d+', res))
+        res = int(res)
+        assert(res <= 0)
 
 
 def get_random_from_format_test3():
@@ -205,9 +207,9 @@ def get_min_value_from_options_test3():
 
 def get_min_value_from_options_test4():
     options, _ = get_parser().parse_args()
-    options.min_int = 0
     options._min = -100
-    assert(get_min_value_from_options(options) == -100)
+    options.min_int = 0  # more priority
+    assert(get_min_value_from_options(options) == 0)
 
 
 def get_max_value_from_options_test():
@@ -218,7 +220,8 @@ def get_max_value_from_options_test():
 def get_max_value_from_options_test2():
     options, _ = get_parser().parse_args()
     options.max_int = 0
-    assert(get_max_value_from_options(options) == 0)
+    res = get_max_value_from_options(options)
+    assert(res == 0)
 
 
 def get_max_value_from_options_test3():
@@ -229,9 +232,9 @@ def get_max_value_from_options_test3():
 
 def get_max_value_from_options_test4():
     options, _ = get_parser().parse_args()
-    options.max_int = 0
+    options.max_int = 0  # more priority
     options._max = -100
-    assert(get_max_value_from_options(options) == -100)
+    assert(get_max_value_from_options(options) == 0)
 
 
 def get_random_result_test5():

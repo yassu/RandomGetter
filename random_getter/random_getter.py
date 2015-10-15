@@ -270,7 +270,7 @@ def get_min_value_from_options(options):
                                   DoubleRandomType: 'min_double',
                                   StrRandomType: 'min_str'}
                         [random_type])
-    if not min_value:
+    if min_value is None:
         min_value = options._min
     return min_value
 
@@ -281,7 +281,7 @@ def get_max_value_from_options(options):
                                   DoubleRandomType: 'max_double',
                                   StrRandomType: 'max_str'}
                         [random_type])
-    if not max_value:
+    if max_value is None:
         max_value = options._max
     return max_value
 
