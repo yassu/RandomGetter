@@ -110,12 +110,12 @@ class IntRandomType(RandomType):
     def get_random(self):
         # consider min_value, max_value and length
         if self.min_value is None:
-            min_value = -(10**self.length - 1)
+            min_value = -(10 ** self.length - 1)
         else:
             min_value = self.min_value
 
         if self.max_value is None:
-            max_value = 10**self.length - 1
+            max_value = 10 ** self.length - 1
         else:
             max_value = self.max_value
 
@@ -149,12 +149,12 @@ class DoubleRandomType(RandomType):
         Use min_double or max_double """
         # consider min_value, max_value and length
         if self.min_value is None:
-            min_value = -(10**self.length - 1)
+            min_value = -(10 ** self.length - 1)
         else:
             min_value = self.min_value
 
         if self.max_value is None:
-            max_value = 10**self.length - 1
+            max_value = 10 ** self.length - 1
         else:
             max_value = self.max_value
 
