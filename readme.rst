@@ -2,6 +2,8 @@
 RandomGetter
 ==============
 
+.. image:: https://travis-ci.org/yassu/RandomGetter.svg?branch=master
+
 This project provides a tools for getting various format or kind Random Value.
 
 How to Install
