@@ -4,11 +4,12 @@ from random_getter.random_getter import *
 import unittest
 import re
 
-DEFAULT_OPTIONS, _ = get_parser().parse_args()
-
+def get_default_option():
+    options, _ = get_parser().parse_args()
+    return options
 
 def get_random_from_format_test():
-    options = DEFAULT_OPTIONS
+    options = get_default_option()
     options.fo = "[int]"
     res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
@@ -18,8 +19,8 @@ def get_random_from_format_test():
 
 
 def get_random_from_format_test2():  # sometimes not passing
+    options = get_default_option()
     for _ in range(10):
-        options, _ = get_parser().parse_args()
         options.fo = "[int]"
         options._max = 0
         print(options)
@@ -30,7 +31,7 @@ def get_random_from_format_test2():  # sometimes not passing
 
 
 def get_random_from_format_test3():
-    options = DEFAULT_OPTIONS
+    options = get_default_option()
     options.fo = "[int0]"
     res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
@@ -39,7 +40,7 @@ def get_random_from_format_test3():
 
 
 def get_random_from_format_test4():
-    options = DEFAULT_OPTIONS
+    options = get_default_option()
     options.fo = "[int:100]"
     res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
@@ -48,7 +49,7 @@ def get_random_from_format_test4():
 
 
 def get_random_from_format_test5():
-    options = DEFAULT_OPTIONS
+    options = get_default_option()
     options.fo = "[int0:100]"
     res = get_random_from_format(options)
     assert(re.search(r'(-)?\d+', res))
@@ -57,7 +58,7 @@ def get_random_from_format_test5():
 
 
 def get_random_from_format_test6():
-    options = DEFAULT_OPTIONS
+    options = get_default_option()
     options.fo = "[double0]"
     res = get_random_from_format(options)
 
@@ -67,7 +68,7 @@ def get_random_from_format_test6():
 
 
 def get_random_from_format_test6():
-    options = DEFAULT_OPTIONS
+    options = get_default_option()
     options.fo = "[double:100]"
     res = get_random_from_format(options)
 
@@ -77,7 +78,7 @@ def get_random_from_format_test6():
 
 
 def get_random_from_format_test7():
-    options = DEFAULT_OPTIONS
+    options = get_default_option()
     options.fo = "[double0:100]"
     res = get_random_from_format(options)
 
@@ -166,72 +167,72 @@ class DoubleRandomTypeTestCase(unittest.TestCase):
 
 
 def get_random_type_from_options_test():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options.is_int_random = True
     assert(get_random_type_from_options(options) == IntRandomType)
 
 
 def get_random_type_from_options_test2():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options.is_str_random = True
     assert(get_random_type_from_options(options) == StrRandomType)
 
 
 def get_random_type_from_options_test3():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options.is_double_random = True
     assert(get_random_type_from_options(options) == DoubleRandomType)
 
 
 def get_random_type_from_options_test4():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     assert(get_random_type_from_options(options) == DEFAULT_RANDOM_TYPE)
 
 
 def get_min_value_from_options_test():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     assert(get_min_value_from_options(options) is None)
 
 
 def get_min_value_from_options_test2():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options.min_int = 0
     assert(get_min_value_from_options(options) == 0)
 
 
 def get_min_value_from_options_test3():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options._min = 0
     assert(get_min_value_from_options(options) == 0)
 
 
 def get_min_value_from_options_test4():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options._min = -100
     options.min_int = 0  # more priority
     assert(get_min_value_from_options(options) == 0)
 
 
 def get_max_value_from_options_test():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     assert(get_max_value_from_options(options) is None)
 
 
 def get_max_value_from_options_test2():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options.max_int = 0
     res = get_max_value_from_options(options)
     assert(res == 0)
 
 
 def get_max_value_from_options_test3():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options._max = 0
     assert(get_max_value_from_options(options) == 0)
 
 
 def get_max_value_from_options_test4():
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options.max_int = 0  # more priority
     options._max = -100
     assert(get_max_value_from_options(options) == 0)
@@ -239,7 +240,7 @@ def get_max_value_from_options_test4():
 
 def get_random_result_test5():
     # for str case 1
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options.is_str_random = True
     res = get_random_result(options)
     assert(res[0] in 'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_')
@@ -249,7 +250,7 @@ def get_random_result_test5():
 
 def get_random_result_test6():
     # for str case 2
-    options, _ = get_parser().parse_args()
+    options = get_default_option()
     options.is_str_random = True
     options.length = 6
     res = get_random_result(options)
