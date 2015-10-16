@@ -1,0 +1,14 @@
+language: python
+python:
+    - "3.4"
+    - "2.7"
+install:
+    - pip install flake8
+script:
+    - "nosetests"
+    - "flake8 random_getter/*.py"
+    - "pep8 test/"
+notifications:
+    email:
+        - mathyassu@gmail.com
+
