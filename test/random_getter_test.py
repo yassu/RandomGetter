@@ -1,6 +1,7 @@
 # coding: UTF-8
 
 from random_getter.random_getter import *
+from nose.tools import raises
 import unittest
 import re
 
@@ -275,3 +276,27 @@ def get_random_result_test6():
     options.length = 6
     res = get_random_result(options)
     assert(len(res) == 6)
+
+def check_option_test():
+    options = get_default_option()
+    check_option(options)   # don't raise Exception
+
+def check_option_test2():
+    options = get_default_option()
+    options.is_double = True
+    check_option(options)   # don't raise Exception
+
+@raises(IllegalOptionMatchException)
+def check_option_test3():
+    options = get_default_option()
+    options.is_double_random = True
+    options.is_str_random = True
+    check_option(options)   # raise Exception
+
+@raises(IllegalOptionMatchException)
+def check_option_test4():
+    options = get_default_option()
+    options.is_int_random = True
+    options.is_double_random = True
+    options.is_str_random = True
+    check_option(options)

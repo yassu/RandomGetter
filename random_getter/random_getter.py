@@ -21,6 +21,10 @@ class DoubleRandomRangeException(Exception):
     pass
 
 
+class IllegalOptionMatchException(Exception):
+    pass
+
+
 def get_random_from_format(options):
     fo = options.fo
     for kind in ('int', 'str', 'double'):
@@ -310,6 +314,14 @@ def get_random_result(options):
             min_value=min_value, max_value=max_value
         ).get_random()
 
+def check_option(options):
+    # more than or equal to two then raise random type error
+    number_of_random_type = [
+        options.is_int_random, options.is_double_random,
+        options.is_str_random].count(True)
+    if number_of_random_type >= 2:
+        raise IllegalOptionMatchException("More than or equal to 2 types")
+
 if __name__ == '__main__':
     (options, args) = get_parser().parse_args()
     if args:
@@ -320,15 +332,16 @@ if __name__ == '__main__':
     random_length = options.length
 
     try:
+        check_option(options)
         for _ in range(random_number):
             ran = get_random_result(options)
             print(ran)
-    except (IntRandomRangeException, DoubleRandomRangeException) as ex:
+    except (IntRandomRangeException, DoubleRandomRangeException,
+            IllegalOptionMatchException) as ex:
         sys.stderr.write("Error: {}".format(str(ex)))
         # str(ex) is a message of ex
     except Exception as ex:
         if options.debug:
             traceback.print_exc()
         else:
-            sys.stderr.write(str(ex))
-            # str(ex) is a message of ex
+            print('Illegal Error')
