@@ -6,9 +6,11 @@ import re
 
 RANDOM_TEST_NUMBER = 10
 
+
 def get_default_option():
     options, _ = get_parser().parse_args()
     return options
+
 
 def get_random_from_format_test():
     options = get_default_option()
@@ -150,9 +152,10 @@ class StrRandomTypeTestCase(unittest.TestCase):
         for _ in range(RANDOM_TEST_NUMBER):
             assert(len(r.get_random()) == DEFAULT_RANDOM_LENGTH)
             assert(r.get_random()[0]
-               in 'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_')
+                   in 'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_')
             assert(r.get_random()[1] in
-               'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_123456789')
+                   'abcdefghiklmnopqrstuvwxyzABCDEFGHIKLMNOPQRSTUVWXYZ_'
+                   '123456789')
 
     def get_random_test2(self):
         for _ in range(RANDOM_TEST_NUMBER):
