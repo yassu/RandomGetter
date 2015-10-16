@@ -1,5 +1,5 @@
 # coding: UTF-8
-#! /usr/bin/env python3
+#!/usr/bin/env python
 
 import random
 import re
