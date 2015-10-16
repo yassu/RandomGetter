@@ -23,7 +23,6 @@ def get_random_from_format_test2():  # sometimes not passing
     for _ in range(10):
         options.fo = "[int]"
         options._max = 0
-        print(options)
         res = get_random_from_format(options)
         assert(re.search(r'(-)?\d+', res))
         res = int(res)

@@ -29,12 +29,18 @@ def get_random_from_format(options):
         kind_element_pat = r'\[{}*({})?(:{})?\]'.format(
             kind, double_pat, double_pat)
         kind_element_match = re.search(kind_element_pat, fo)
+        default_min = options._min
+        default_max = options._max
         while kind_element_match:
             if kind in ('int', 'double'):
                 min_kind = getattr(options, {'int': 'min_int', 'double':
                                              'min_double'}[kind])
+                if min_kind is None:
+                    min_kind = default_min
                 max_kind = getattr(options, {'int': 'max_int', 'double':
                                              'max_double'}[kind])
+                if max_kind is None:
+                    max_kind = default_max
 
             element_min, element_max = kind_element_match.groups()
             if element_min is not None and kind == 'int':
