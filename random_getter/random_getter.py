@@ -1,4 +1,6 @@
 # coding: UTF-8
+#! /usr/bin/env python3
+
 import random
 import re
 from optparse import OptionParser
