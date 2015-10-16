@@ -314,6 +314,7 @@ def get_random_result(options):
             min_value=min_value, max_value=max_value
         ).get_random()
 
+
 def check_option(options):
     # more than or equal to two then raise random type error
     number_of_random_type = [
