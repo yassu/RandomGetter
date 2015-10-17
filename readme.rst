@@ -46,11 +46,11 @@ Options
 
 In default, length of random values is 4 and type of random values is `int`.
 
-This means that in default, this program occurs `int` object and -10**4 + 1 <=
-random number < 10**4 - 1.
+This means that in default, this program occurs `int` object such that -10**4 <
+random number < 10**4.
 
 * `--int`: occur `int` random value
-* `--str`: occur `str` random value (`str` means ...)
+* `--str`: occur `str` random value
 * `--double`: occur `double` random value
 * `-n, --number`: indicate number of random values
 * `-l, --length`: indicate length of random values
