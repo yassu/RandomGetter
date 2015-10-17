@@ -7,7 +7,7 @@ from optparse import OptionParser
 import sys
 import traceback
 
-__VERSION__ = '0.0.7'
+__VERSION__ = '0.0.8'
 DEFAULT_RANDOM_TYPE = None  # re-define after
 DEFAULT_RANDOM_LENGTH = 4
 DEFAULT_RANDOM_NUMBER = 1
